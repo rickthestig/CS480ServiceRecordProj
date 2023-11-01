@@ -5,6 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Settings</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+        <?php
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $db_name = "service_project_db";
+
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $db_name);
+
+            // Check connection
+            if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+            }
+            echo "Connected successfully";
+        ?>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
