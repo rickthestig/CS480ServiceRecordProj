@@ -68,6 +68,21 @@
             <div class="col-auto">
               <button type="submit" class="btn btn-primary mb-3">Forgot Password</button>
             </div>
+            <?php
+                /* $sqladm = $conn->prepare("SELECT AdminEmail from SharedDB Limit 1"); */
+                //change to actual sql query *******
+                /* $sqlbook->bindParam("s","%" . $search . "%"); */
+/*                 $sqladm->execute();
+                $result = $sqladm->get_result();
+                $sqladm->close(); */
+                $result = "erekg13@gmail.com";
+                //perhaps we change this later
+                if(!empty($_POST["emailInput"])){
+                    $selected = $_POST["emailInput"];
+                }
+                $msg = "User " . "$selected" . " has forgotten their password.  Please reset it for them and email them.";
+                $mail("$result","password reset",$msg);
+            ?>
           </form>
           <h4 class="text-center">If your email exists in the system, you will be emailed with a password reset link shortly!</h4>
     </body>

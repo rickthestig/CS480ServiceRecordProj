@@ -69,4 +69,21 @@
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary mb-3">Send</button>
                 </div>
+                <?php
+                /* $sqladm = $conn->prepare("SELECT AdminEmail from SharedDB Limit 1"); */
+                //change to actual sql query *******
+                /* $sqlbook->bindParam("s","%" . $search . "%"); */
+/*                 $sqladm->execute();
+                $result = $sqladm->get_result();
+                $sqladm->close(); */
+                $result = "erekg13@gmail.com";
+                //perhaps we change this later
+                if(!empty($_POST["body"])){
+                    $body = $_POST["body"];
+                }
+                if(!empty($_POST["subject"])){
+                    $subj = $_POST["subject"];
+                }
+                $mail("$result","$subj",$body);
+            ?>
               </form>
