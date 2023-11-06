@@ -68,13 +68,13 @@
             <h1 class="text-center">Service Account Registration Page</h1>
           </div>
           <!-- input first and last name -->
-        <form id="regForm" action="POST">
+        <form name="regForm" id="regForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
         <div class="container-sm">
         <div class="mt-3">
             <div class="input-group">
             <span class="input-group-text">First and last name</span>
-            <input type="text" aria-label="First name" class="form-control" id="inputFirst">
-            <input type="text" aria-label="Last name" class="form-control" id="inputLast">
+            <input type="text" aria-label="First name" class="form-control" name="inputFirst" id="inputFirst" required>
+            <input type="text" aria-label="Last name" class="form-control" name="inputLast" id="inputLast" required>
           </div>
         </div>
         <div class="container-sm align-content-center">
@@ -84,16 +84,16 @@
                 <div class="col">
             <div class="my-3">
                 <label for="inputEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                <input type="email" name="inputEmail" class="form-control" id="inputEmail" aria-describedby="emailHelp" required>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword">
+                <input type="password" name="inputPassword" class="form-control" id="inputPassword" required>
             </div>
             <div class="my-3">
                 <label for="inputState" class="form-label">User's State</label>
-                <select id="inputState" class="form-select">
+                <select id="inputState" name="inputState" class="form-select" required>
                     <option selected>Choose...</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -149,7 +149,7 @@
                 </select>
             </div>
             </div>
-            <div class="col my-3">
+            <!-- <div class="col my-3">
                 <div class="d-inline-block">
                     <label class="form-label" for="inputFile">Upload Profile Picture</label>
                 </div>
@@ -157,26 +157,27 @@
                     <input type="file" class="form-control" accept="image/*" onchange="loadFile(event)">
                 </div>
                 <img src="..." class="img-thumbnail-my-1" alt="preview of uploaded image" id="imagePreview">
+            </div> -->
             </div>
             </div>
-            </div>
-                <button type="submit" class="btn btn-primary">Create Account</button>
+                <input type="submit" class="btn btn-primary" name="submitButton" id="submitButton" value="Create Account">
         </form>
         <?php
-
-            $firstName = $_POST["inputFirst"];
-            $lastName = $_POST["inputLast"];
-            $username = $_POST["inputEmail"];
-            $password = $_POST["inputPassword"];
-            $state = $_POST["inputState"];
             
-            $sql = "INSERT INTO user (Username, Password, FirstName, LastName, State) VALUES ('$Username', '$password', '$firstName', '$lastName', '$state')"
-            if ($conn->query($sql) === TRUE) {
-                echo "User registered successfully";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
-            }
+            $firstName = isset($_POST['inputFirst']) ? $_POST['inputFirst'] : "";
+            $lastName = isset($_POST['inputLast']) ? $_POST['inputLast'] : "";
+            $username = isset($_POST['inputEmail']) ? $_POST['inputEmail'] : "";
+            $password = isset($_POST['inputPassword']) ? $_POST['inputPassword'] : "";
+            $state = isset($_POST['inputState']) ? $_POST['inputState'] : "";
 
+            if(isset($_POST["submitButton"])) {
+                $sql = "INSERT INTO user (Username, Password, FirstName, LastName, State) VALUES ('$username', '$password', '$firstName', '$lastName', '$state')";
+                if ($conn->query($sql) === TRUE) {
+                    echo "User registered successfully";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+            }
             $conn->close();
         ?>
     </body>
