@@ -32,10 +32,10 @@
                     </li>
                 </ul>
                 <div class="container-sm align-content-center">
-                    <form class="d-flex container-fluid justify-content-start" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex container-fluid justify-content-start" role="search" action="BrowseServiceProjs.php" method="post">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="simpsearch" name="simpsearch">
                         <a href="BrowseServiceProjs.html">
-                        <button class="btn btn-outline-success" type="button">
+                        <button class="btn btn-outline-success" type="submit">
                             <img src="https://static.thenounproject.com/png/5103870-200.png" width="20" height="20">
                         </button>
                         </a>
