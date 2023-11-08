@@ -21,6 +21,17 @@
             }
             echo "Connected successfully";
         ?>
+        <script>
+            function searchQuery(str, id) {
+                var val =document.getElementById(id).value;
+                const xhttp = new XMLHttpRequest();
+                xhttp.onload = function() {
+                    document.getElementById("mrplaceholder").innerHTML = this.responseText;
+                }
+                xhttp.open("GET", "Searcher.php?q="+str);/* add value of selected filter */
+                xhttp.send();
+                }
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -58,19 +69,27 @@
         <div class="mt-3">
             <h1 class="text-center">Advanced Search</h1>
             <form class="row g-3 justify-content-center p-5">
-                <select class="form-group col-md-1">
-                    <option selected>Filter...</option>
-                    <option>Name</option>
-                    <option>Location</option>
-                    <option>Rating</option>
-                    <option>Date</option>
+                <select class="form-group col-md-1" id='ftype'>
+                    <option value="1" selected>Name</option>
+                    <option value="2">Location</option>
+                    <option value="3">Rating</option>
+                    <option value="4">Date in yyyy-mm-dd (with dashes)</option>
                 </select>
+                
                 <div class="form-group col-md-1">
                     <input class="form-check-input" type="checkbox" value="" id="notFull">
                     <label class="form-check-label" for="notFull">Not Full</label>
                 </div>
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Advanced search" aria-label="Search" aria-describedby="search-addon" />
+                    <input type="search" class="form-control rounded" placeholder="Advanced search" aria-label="Search" aria-describedby="search-addon" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
                     <button type="button" class="btn btn-outline-primary">search</button>
                 </div>
             </form>
+        </div>
+        <div class="align-content-center">
+            <table class="table">
+                <div id="mrplaceholder"></div>
+            </table>
+        </div>
+    </body>
+</html>
