@@ -25,33 +25,47 @@ session_start();
         ?>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <span class="navbar-brand">Service Project</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a href="#" class="nav-link">Home</a>
+                        <a href="BrowseServiceProjs.html" class="nav-link">Home</a>
                     </li>
                 </ul>
                 <div class="container-sm align-content-center">
                     <form class="d-flex container-fluid justify-content-start" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">
+                        <a href="BrowseServiceProjs.html">
+                        <button class="btn btn-outline-success" type="button">
                             <img src="https://static.thenounproject.com/png/5103870-200.png" width="20" height="20">
                         </button>
+                        </a>
+                        <a href="AdvancedSearch.html">
                         <button class="btn btn-sm btn-outline-secondary" type="button">Advanced</button>
+                        </a>
                     </form>
                 </div>
-                <div class="d-flex justify-content-end">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="profile" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                        <ul class="dropdown-menu" aria-labelledby="profile">
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="justify-content-end collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="Settings.php">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
                         </ul>
-                    </div>
-                    <img class="d-inline-block" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png"
-                    width="30" height=30>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <a href="Settings.php">
+                        <img class="d-inline-block" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png"
+                        width="30" height=30>
+                    </a>
                 </div>
             </div>
         </nav>
