@@ -55,9 +55,29 @@
                 </div>
             </div>
         </nav>
-        <div class="container-sm align-content-center">
+        <div class="align-content-center">
             <table class="table">
-                <tr>
+                <?php
+                        $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount` FROM `service`");
+                        /* $sqlbook->bindParam("s","%" . $search . "%"); */
+                        $sqlbrowse->execute();
+                        $result = $sqlbrowse->get_result();
+                        $sqlbrowse->close();
+                        echo 
+                            "<tr>
+                                <th>Name</th>
+                                <th>Short Description</th>
+                                <th>Location</th>
+                                <th>Rating</th>
+                                <th>Max User Count</th>
+                            </tr>";
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr><td>" . $row["Name"] . "</td><td>" . $row["Blurb"] . "</td><td>" . $row["Location"] . "<tr><td>" . $row["Rating"] . "</td><td>" . $row["MaxUserCount"];
+                                echo "</td></tr>\n";
+                            }
+                        $conn->close();
+                ?>
+                <!-- <tr>
                     <th><a href="ServicePage.html">Dane County Humane Society Volunteering</a></th>
                     <td>Help animals at the Dane County Humane Society</td>
                     <td>5132 Voges Rd, Madison, WI 53718</td>
@@ -84,7 +104,7 @@
                     <td>5132 Voges Rd, Madison, WI 53718</td>
                     <td>rating goes here</td>
                     <td>5/10 people have signed up</td>
-                </tr>
+                </tr> -->
             </table>
         </div>
     </body>
