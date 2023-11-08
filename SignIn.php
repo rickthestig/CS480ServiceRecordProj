@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
     <head>
@@ -46,14 +49,14 @@
                 </div>
             </div>
         </nav>
-        <form class="container-sm align-content-center" action=""> <!-- needs action -->
+        <form class="container-sm align-content-center" action="BrowseServiceProjs.php" method="post">
             <div class="mb-3">
                 <label for="emailInput" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="name@example.com">
             </div>
             <div class="mb-3">
                 <label for="passwordInput" class="form-label">Password</label>
-                <input class="form-control" id="passwordInput" type="password">
+                <input class="form-control" id="passwordInput" name="passwordInput" type="password">
             </div>
             <div>
                 <a href="ForgotPassword.html">
@@ -64,10 +67,23 @@
                 <button type="submit" class="btn btn-primary">Sign in</button>
             </div>
             <div class="d-flex justify-content-center p-3">
-                <a href="Registration.html">
+                <a href="Registration.php">
                     <h6>Create Account</h2>
                 </a>
             </div>
         </form>
+        <?php
+            $username = $_POST["emailInput"] ? $_POST["emailInput"] : "";
+            $password = $_POST["passwordInput"] ? $_POST["passwordInput"] : "";
+
+            $sql = "SELECT UserID FROM User WHERE username LIKE $username AND password LIKE $password";
+            $result = $conn->query($sql);
+                if ($result === TRUE) {
+                    $_SESSION["UserID"] = $result;
+                    echo "User signed in successfully";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+        ?>
     </body>
 </html>
