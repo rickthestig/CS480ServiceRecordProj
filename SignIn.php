@@ -43,20 +43,26 @@ session_start();
                     </form>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <h3>^</h3>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="profile" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                        <ul class="dropdown-menu" aria-labelledby="profile">
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                        </ul>
+                    </div>
                     <img class="d-inline-block" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png"
                     width="30" height=30>
                 </div>
             </div>
         </nav>
-        <form class="container-sm align-content-center" action="BrowseServiceProjs.php" method="post">
+        <form class="container-sm align-content-center" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
             <div class="mb-3">
                 <label for="emailInput" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="name@example.com">
+                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="name@example.com" required>
             </div>
             <div class="mb-3">
                 <label for="passwordInput" class="form-label">Password</label>
-                <input class="form-control" id="passwordInput" name="passwordInput" type="password">
+                <input class="form-control" id="passwordInput" name="passwordInput" type="password" required>
             </div>
             <div>
                 <a href="ForgotPassword.html">
@@ -64,7 +70,7 @@ session_start();
                 </a>
             </div>
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+            <input type="submit" class="btn btn-primary" name="submitButton" id="submitButton" value="Sign in">
             </div>
             <div class="d-flex justify-content-center p-3">
                 <a href="Registration.php">
@@ -73,17 +79,19 @@ session_start();
             </div>
         </form>
         <?php
-            $username = $_POST["emailInput"] ? $_POST["emailInput"] : "";
-            $password = $_POST["passwordInput"] ? $_POST["passwordInput"] : "";
+            $username = isset($_POST["emailInput"]) ? $_POST["emailInput"] : "";
+            $password = isset($_POST["passwordInput"]) ? $_POST["passwordInput"] : "";
 
-            $sql = "SELECT UserID FROM User WHERE username LIKE $username AND password LIKE $password";
-            $result = $conn->query($sql);
-                if ($result === TRUE) {
-                    $_SESSION["UserID"] = $result;
-                    echo "User signed in successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                }
+            if(isset($_POST["submitButton"])) {
+                $sql = "SELECT UserID FROM user WHERE username = $username AND password = $password";
+                $result = $conn->query($sql);
+                    if ($result === TRUE) {
+                        $_SESSION["UserID"] = $result;
+                        echo "User signed in successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+            }
         ?>
     </body>
 </html>
