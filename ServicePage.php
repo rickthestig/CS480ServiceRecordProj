@@ -74,6 +74,7 @@
             </div>
         </nav>
             <div class="container-sm align-content-center my-3">
+
                 <div class="row">
                     <div class="col">
                         <img src="https://www.cityofmadison.com/sites/default/files/events/images/dchs.jpg" class="img-thumbnail" alt="...">
