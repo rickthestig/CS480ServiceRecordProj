@@ -23,7 +23,7 @@
         ?>   
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <span class="navbar-brand">Service Project</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
@@ -44,11 +44,23 @@
                         </a>
                     </form>
                 </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="justify-content-end collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="navbarDarkDropdownMenuLink">
+                            <li><a class="dropdown-item" href="Settings.php">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div>
                 <div class="d-flex justify-content-end">
-                    <a href="Settings.html">
-                        <h3>^</h3>
-                    </a>
-                    <a href="SignIn.html">
+                    <a href="Settings.php">
                         <img class="d-inline-block" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png"
                         width="30" height=30>
                     </a>
