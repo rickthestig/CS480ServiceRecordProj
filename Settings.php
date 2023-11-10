@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Settings</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
         <?php
             $servername = "localhost";
             $username = "root";
@@ -32,17 +33,27 @@
                     </li>
                 </ul>
                 <div class="container-sm align-content-center">
-                    <form class="d-flex container-fluid justify-content-start" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <a href="BrowseServiceProjs.html">
-                        <button class="btn btn-outline-success" type="button">
-                            <img src="https://static.thenounproject.com/png/5103870-200.png" width="20" height="20">
-                        </button>
-                        </a>
-                        <a href="AdvancedSearch.html">
-                        <button class="btn btn-sm btn-outline-secondary" type="button">Advanced</button>
+                    <form class="d-flex container-fluid justify-content-start" role="search" method="post" action="BrowseServiceProjs.php">
+                        <input class="form-control me-2" id="searchInput" name="searchInput" type="search" placeholder="Search" aria-label="Search">
+                        <input type="submit" class="btn btn-outline-success" name="searchBtn" id="searchBtn" value="Search" >
+                    <a href="AdvancedSearch.php">
+                        <input type="button" class="btn btn-sm btn-outline-secondary" name="advancedBtn" id="advancedBtn" value="Advanced">
                         </a>
                     </form>
+                    <?php
+
+                        $search = isset($_POST["searchInput"]) ? $_POST["searchInput"] : "";
+
+                        if(isset($_POST["searchBtn"])) {
+                            $sql = "SELECT Name FROM Service WHERE Name LIKE '%$search%'";
+                            $result = $conn->query($sql);
+
+
+                            //will have to query this on BrowseServerProjs.php - form redirects them on 'post'
+                        }
+
+
+                    ?>
                 </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
