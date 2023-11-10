@@ -16,7 +16,6 @@
     /* $sqlbook->bindParam("s","%" . $search . "%"); */
     $sqlbrowse->execute();
     $result = $sqlbrowse->get_result();
-    $sqlbrowse->close();
     echo 
         "<div class=\"align-content-center\">
             <table class=\"table\">
@@ -32,17 +31,21 @@
         while ($row = $result->fetch_assoc()) {
             echo "<tr><td>" . $row["Name"] . "</td><td>" . $row["Blurb"] . "</td><td>" . $row["Location"] . "<tr><td>" . $row["Rating"] . "</td><td>" . $row["MaxUserCount"];
             echo "</td></tr>\n";
+            $sqlID = $conn->prepare("SELECT ServiceID FROM `service` WHERE Name LIKE '%$input%'");
+            /* THIS STUPID THING MADE ME SEETHE FOR 2 and a half hours because i quoted the STUPID SERVICE ID, I AM SEETHING AND MALDING, but at least it works now */
+            /* $sqlbook->bindParam("s","%" . $search . "%"); */
+            $sqlID->execute();
+            $result = $sqlID->get_result();
+            $ID = $result->fetch_assoc();
+            $ID = $ID["ServiceID"];
+            echo "<form action=\"ServicePage.php\" method=\"post\">";
+            echo "<input type=\"text\" id=\"val\" value=\"$ID\" disabled>";
+            echo "<input type=\"submit\">";
+            /* the chance this acutally works is basically none, good luck my small amount of remaining sanity */
+            /* I HATE ARRAYS */
         }
-    $sqlID = $conn->prepare("SELECT 'ServiceID' FROM `service` WHERE Name LIKE '%$input%'");
-    /* $sqlbook->bindParam("s","%" . $search . "%"); */
-    $sqlID->execute();
-    $result = $sqlID->get_result();
-    $sqlID->close();
-    $conn->close();
-    $ID = $result->fetch_assoc();
-    echo "<form action=\"\" method=\"\">";
-    echo "<input type=\"text\" id=\"val\" value=\"$ID\" disabled>";
-    echo "<input type=\"submit\">";
-    /* the chance this acutally works is basically none, good luck my small amount of remaining sanity */
-    /* I HATE ARRAYS */
+        $sqlbrowse->close();
+        $sqlID->close();
+        $conn->close();
+
 ?>
