@@ -87,54 +87,66 @@
             </div>
         </nav>
             <div class="container-sm align-content-center my-3">
-
+                <?php
+                $servID = $_POST['val'];
+                $sql = "SELECT 'Name', 'Description', Organizer, 'Location', Rating, MaxUserCount, StartDate, StartTime, EndDate, EndTime FROM `service` WHERE Name LIKE '%$input%'";
+                $result = mysqli_query($conn, $sql);
+                $user_data = mysqli_fetch_assoc($result);
+                $sql2 = "SELECT COUNT (`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
+                $results = mysqli_query($conn, $sql2);
+                $signedup = mysqli_fetch_assoc($results);
+                ?>
                 <div class="row">
-                    <div class="col">
+                    <dv class="col">
                         <img src="https://www.cityofmadison.com/sites/default/files/events/images/dchs.jpg" class="img-thumbnail" alt="...">
                     </div>
                     <div class="col">
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="Dane County Humane Society Volunteering" disabled>
+                            <input type="text" class="form-control" id="name" value="<?php echo $user_data['Name']; ?>" disabled>
                         </div>
                         <label for="organizer" class="col-sm-2 col-form-label">Organizer</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="organizer" placeholder="Mr. A. Nimal" disabled>
+                            <input type="text" class="form-control" id="organizer" Value="<?php echo $user_data['Organizer']; ?>" disabled>
                         </div>
                         <label for="desc" class="col-sm-2 col-form-label">Description</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="desc" placeholder="This is a longer description than the blurb on the homepage" disabled></textarea>
+                            <textarea class="form-control" id="desc" Value="<?php echo $user_data['Description']; ?>" disabled></textarea>
                         </div>
                     </div>
                     <div class="col">
                         <label for="slots" class="col-sm-3 col-form-label">Filled Slots</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="slots" placeholder="5/10" disabled>
+                            <input type="text" class="form-control" id="slots" Value="<?php echo $signedup["UserID"] . "/" . $user_data['username']; ?>" disabled> 
                         </div>
                         <label for="loc" class="col-sm-2 col-form-label">Location</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="loc" placeholder="5132 Voges Rd, Madison, WI 53718 (map will go here eventually)" disabled>
+                            <input type="text" class="form-control" id="loc" value="<?php echo $user_data['Location']; ?>" disabled> <!-- Add Map? -->
                         </div>
                         <label for="rate" class="col-sm-2 col-form-label">Rating</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="rate" placeholder="Rating will go here" disabled>
+                            <input type="text" class="form-control" id="rate" Value="<?php echo $user_data['Rating']; ?>" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col">
                     <div class="col-md-2">
-                        <label for="startTime">Start Time:</label>
-                        <input class="form-control" type="text" id="time1" placeholder="10/18/2023 10:00">  
+                        <label for="date1">Start Date:</label>
+                        <input class="form-control" type="text" id="date1" value="<?php echo $user_data['StartDate']; ?>" disabled>  
+                        <label for="time1">Start Time:</label>
+                        <input class="form-control" type="text" id="time1" value="<?php echo $user_data['StartTime']; ?>" disabled>  
                     </div>
                     <div class="col-md-2">
-                        <label for="startTime">End Time:</label>
-                        <input class="form-control" type="text" id="time2" placeholder="10/18/2023 17:00">  
+                        <label for="date2">End Date:</label>
+                        <input class="form-control" type="text" id="date2" value="<?php echo $user_data['EndDate']; ?>" disabled>  
+                        <label for="time2">End Time:</label>
+                        <input class="form-control" type="text" id="time2" value="<?php echo $user_data['EndTime']; ?>" disabled>  
                     </div>
                 </div>
                 <div class="row justify-content-center p-5">
                     <div class="col-auto">
                         <a href="ContactOrganizers.html">
-                            <button class="btn btn-primary mb-3 p-3">Contact Organizers</button>
+                            <button class="btn btn-primary mb-3 p-3">Contact Organizers</button> <!-- add functionality here for session -->
                         </a>
                     </div>
                     <div class="col-auto">
