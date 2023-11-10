@@ -88,13 +88,13 @@
         </nav>
             <div class="container-sm align-content-center my-3">
                 <?php
-                $servID = $_POST['val'];
-                $sql = "SELECT 'Name', 'Description', Organizer, 'Location', Rating, MaxUserCount, StartDate, StartTime, EndDate, EndTime FROM `service` WHERE Name LIKE '%$input%'";
+                $servID = isset($_POST['val']) ? $_POST['val'] : "";
+                $sql = "SELECT Name, Description, Organizer, Location, Rating, MaxUserCount, StartDate, StartTime, EndDate, EndTime FROM `service` WHERE ServiceID LIKE '%$servID%'";
                 $result = mysqli_query($conn, $sql);
                 $user_data = mysqli_fetch_assoc($result);
                 $sql2 = "SELECT COUNT (`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
-                $results = mysqli_query($conn, $sql2);
-                $signedup = mysqli_fetch_assoc($results);
+                $result = mysqli_query($conn, $sql2);
+                $signedup = mysqli_fetch_assoc($result);
                 ?>
                 <div class="row">
                     <dv class="col">
