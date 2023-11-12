@@ -44,17 +44,27 @@ session_start();
                     </li>
                 </ul>
                 <div class="container-sm align-content-center">
-                    <form class="d-flex container-fluid justify-content-start" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <a href="BrowseServiceProjs.html">
-                        <button class="btn btn-outline-success" type="button">
-                            <img src="https://static.thenounproject.com/png/5103870-200.png" width="20" height="20">
-                        </button>
-                        </a>
-                        <a href="AdvancedSearch.html">
-                        <button class="btn btn-sm btn-outline-secondary" type="button">Advanced</button>
+                    <form class="d-flex container-fluid justify-content-start" role="search" method="post" action="BrowseServiceProjs.php">
+                        <input class="form-control me-2" id="searchInput" name="searchInput" type="search" placeholder="Search" aria-label="Search">
+                        <input type="submit" class="btn btn-outline-success" name="searchBtn" id="searchBtn" value="Search" >
+                    <a href="AdvancedSearch.php">
+                        <input type="button" class="btn btn-sm btn-outline-secondary" name="advancedBtn" id="advancedBtn" value="Advanced">
                         </a>
                     </form>
+                    <?php
+
+                        $search = isset($_POST["searchInput"]) ? $_POST["searchInput"] : "";
+
+                        if(isset($_POST["searchBtn"])) {
+                            $sql = "SELECT Name FROM Service WHERE Name LIKE '%$search%'";
+                            $result = $conn->query($sql);
+
+
+                            //will have to query this on BrowseServerProjs.php - form redirects them on 'post'
+                        }
+
+
+                    ?>
                 </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

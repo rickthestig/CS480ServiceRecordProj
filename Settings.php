@@ -24,7 +24,7 @@
         ?>
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <span class="navbar-brand">Service Project</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
