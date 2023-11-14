@@ -11,17 +11,19 @@
         <link href=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css” rel=”stylesheet”>
         <script src=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js”> </script>
         <script>
-            $(document).ready(function () {
-                $('#time1').datetimepicker({
-                    format: 'yyyy-mm-dd'
-                });
-                $('#time2').datetimepicker({
-                    format: 'yyyy-mm-dd'
-                });
-                $('#signup').click(function(){
-                    $('#signup').hide();
-                });
-            });
+            function updateButton() {
+                var signup = document.getElementById("signup");
+                var leave = document.getElementById("leave");
+
+                if(signup.style.display === "flex") {
+                    signup.style.display = "none";
+                    leave.style.display = "flex";
+                }else {
+                    signup.style.display = "flex";
+                    leave.style.display = "none";
+                }
+
+            }
         </script>
     
         <?php
@@ -103,8 +105,8 @@
                 $result = mysqli_query($conn, $sql);
                 $user_data = mysqli_fetch_assoc($result);
                 $sql2 = "SELECT COUNT (`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
-                $result = mysqli_query($conn, $sql2);
-                $signedup = mysqli_fetch_assoc($result);
+                //$result = mysqli_query($conn, $sql2);
+                //$signedup = mysqli_fetch_assoc($result);
                 ?>
                 <div class="row">
                     <dv class="col">
@@ -160,8 +162,8 @@
                         </a>
                     </div>
                     <div class="col-auto">
-                        <button type="button" class="btn btn-primary mb-3 p-3" id="signup">Sign Up</button>
-                        <button class="btn btn-outline-danger mb-3 p-3" id="leave">Leave Service</button>
+                        <button type="button" class="btn btn-primary mb-3 p-3" id="signup" onclick="updateButton()" >Sign Up</button>
+                        <button class="btn btn-outline-danger mb-3 p-3" id="leave" onclick="updateButton()" style="display: none;">Leave Service</button>
                     </div>
                 </div>
             </div>
