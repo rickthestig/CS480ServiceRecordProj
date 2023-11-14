@@ -32,6 +32,43 @@
                 xhttp.open("GET", "Searcher.php?q="+str);/* add value of selected filter */
                 xhttp.send();
                 }
+
+                function showSearch() {
+                    var selectValue = document.getElementById("filter");
+                    var selected = selectValue.value;
+
+                    if (selected === "name") {
+                        document.getElementById("nameSearch").style.display = "flex";
+                        document.getElementById("locationSearch").style.display = "none";
+                        document.getElementById("ratingSearch").style.display = "none";
+                        document.getElementById("dateSearch").style.display = "none";
+                        console.log("name");
+                    } else if (selected === "location") {
+                        document.getElementById("locationSearch").style.display = "flex";
+                        document.getElementById("nameSearch").style.display = "none";
+                        document.getElementById("ratingSearch").style.display = "none";
+                        document.getElementById("dateSearch").style.display = "none";
+                        console.log("location");
+                    } else if (selected === "rating") {
+                        document.getElementById("ratingSearch").style.display = "flex";
+                        document.getElementById("locationSearch").style.display = "none";
+                        document.getElementById("nameSearch").style.display = "none";
+                        document.getElementById("dateSearch").style.display = "none";
+                        console.log("rating");
+                    }else if (selected === "date") {
+                        document.getElementById("nameSearch").style.display = "none";
+                        document.getElementById("locationSearch").style.display = "none";
+                        document.getElementById("ratingSearch").style.display = "none";
+                        document.getElementById("dateSearch").style.display = "flex";
+                        console.log("date");
+                    }else {
+                        document.getElementById("nameSearch").style.display = "none";
+                        document.getElementById("locationSearch").style.display = "none";
+                        document.getElementById("ratingSearch").style.display = "none";
+                        document.getElementById("dateSearch").style.display = "none";
+                        console.log("None");
+                    }
+                }
         </script>
     </head>
     <body>
@@ -92,19 +129,32 @@
         <div class="mt-3">
             <h1 class="text-center">Advanced Search</h1>
             <form class="row g-3 justify-content-center p-5">
-                <select class="form-group col-md-1" id='ftype'>
-                    <option value="1" selected>Name</option>
-                    <option value="2">Location</option>
-                    <option value="3">Rating</option>
-                    <option value="4">Date in yyyy-mm-dd (with dashes)</option>
+                <select class="select col-md-1" id="filter" name="filter" onchange="showSearch()">
+                    <option value="name" selected>Name</option>
+                    <option value="location">Location</option>
+                    <option value="rating">Rating</option>
+                    <option value="date">Date in yyyy-mm-dd (with dashes)</option>
                 </select>
+
                 
                 <div class="form-group col-md-1">
-                    <input class="form-check-input" type="checkbox" value="" id="notFull">
+                    <input class="form-check-input" type="checkbox" value="full" id="notFull">
                     <label class="form-check-label" for="notFull">Not Full</label>
                 </div>
-                <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Advanced search" aria-label="Search" aria-describedby="search-addon" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
+                <div class="input-group" id="nameSearch" name="nameSearch">
+                    <input id="nameInput" type="search" class="form-control rounded" placeholder="Advanced search" aria-label="Search1" aria-describedby="search-addon1" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
+                </div>
+                <div class="input-group" id="locationSearch" name="locationSearch" style="display: none;">
+                    <input id="locationInput" type="search" class="form-control rounded" placeholder="Location search" aria-label="Search2" aria-describedby="search-addon2" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
+                </div>
+                <div class="input-group" id="ratingSearch" name="ratingSearch" style="display: none;">
+                    <label for="customRange2" class="form-label">Rating 1-5:</label>
+                    <input type="range" class="form-range" min="0" max="5" id="customRange2" aria-label="Search3" aria-describedby="search-addon3">
+                </div>
+                <div class="input-group" id="dateSearch" name="dateSearch" style="display: none;">
+                    <input id="dateInput" type="search" class="form-control rounded" placeholder="yyy-mm-dd (with dashes)" aria-label="Search4" aria-describedby="search-addon4" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
                     <button type="button" class="btn btn-outline-primary">search</button>
                 </div>
             </form>
