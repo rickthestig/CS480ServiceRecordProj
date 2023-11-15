@@ -105,8 +105,8 @@
                 $result = mysqli_query($conn, $sql);
                 $user_data = mysqli_fetch_assoc($result);
                 $sql2 = "SELECT COUNT (`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
-                //$result = mysqli_query($conn, $sql2);
-                //$signedup = mysqli_fetch_assoc($result);
+                $result = mysqli_query($conn, $sql2);
+                $signedup = mysqli_fetch_assoc($result);
                 ?>
                 <div class="row">
                     <dv class="col">
