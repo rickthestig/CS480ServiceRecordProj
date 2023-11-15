@@ -142,20 +142,20 @@
                     <label class="form-check-label" for="notFull">Not Full</label>
                 </div>
                 <div class="input-group" id="nameSearch" name="nameSearch">
-                    <input id="nameInput" type="search" class="form-control rounded" placeholder="Advanced search" aria-label="Search1" aria-describedby="search-addon1" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
+                    <input id="nameInput" type="search" class="form-control rounded" placeholder="Advanced search" aria-label="Search1" aria-describedby="search-addon1" onkeyup="searchQuery(this.value, 'filter')"/> <!-- I need to add functionality for this to get the selected value-->
                 </div>
                 <div class="input-group" id="locationSearch" name="locationSearch" style="display: none;">
-                    <input id="locationInput" type="search" class="form-control rounded" placeholder="Location search" aria-label="Search2" aria-describedby="search-addon2" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
+                    <input id="locationInput" type="search" class="form-control rounded" placeholder="Location search" aria-label="Search2" aria-describedby="search-addon2" onkeyup="searchQuery(this.value, 'filter')"/> <!-- I need to add functionality for this to get the selected value-->
                 </div>
                 <div class="input-group" id="ratingSearch" name="ratingSearch" style="display: none;">
                     <label for="customRange2" class="form-label">Rating 1-5:</label>
                     <input type="range" class="form-range" min="0" max="5" id="customRange2" aria-label="Search3" aria-describedby="search-addon3">
                 </div>
                 <div class="input-group" id="dateSearch" name="dateSearch" style="display: none;">
-                    <input id="dateInput" type="search" class="form-control rounded" placeholder="yyy-mm-dd (with dashes)" aria-label="Search4" aria-describedby="search-addon4" onkeyup="searchQuery(this.value, 'ftype')"/> <!-- I need to add functionality for this to get the selected value-->
+                    <input id="dateInput" type="search" class="form-control rounded" placeholder="yyy-mm-dd (with dashes)" aria-label="Search4" aria-describedby="search-addon4" onkeyup="searchQuery(this.value, 'filter')"/> <!-- I need to add functionality for this to get the selected value-->
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
-                    <button type="button" class="btn btn-outline-primary">search</button>
+                    <button type="button" class="btn btn-outline-primary">Search</button>
                 </div>
             </form>
         </div>
