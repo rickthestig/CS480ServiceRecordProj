@@ -39,7 +39,7 @@
             $ID = $result->fetch_assoc();
             $ID = $ID["ServiceID"];
             echo "<form action=\"ServicePage.php\" method=\"post\">";
-            echo "<input type=\"text\" id=\"val\" value=\"$ID\" disabled>";
+            echo "<input type=\"text\" id=\"val\" value=\"$ID\" readonly=\"readonly\">";
             echo "<input type=\"submit\">";
             /* the chance this acutally works is basically none, good luck my small amount of remaining sanity */
             /* I HATE ARRAYS */
