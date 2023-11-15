@@ -77,7 +77,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a href="BrowseServiceProjs.html" class="nav-link">Home</a>
+                        <a href="BrowseServiceProjs.php" class="nav-link">Home</a>
                     </li>
                 </ul>
                 <div class="container-sm align-content-center">
