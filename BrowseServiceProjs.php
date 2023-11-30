@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION['UserID'])) {
+    $id = $_SESSION['UserID'];
+}else {
+    echo '<script>window.location.href = "Signin.php"</script>';
+}
+?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
     <head>
@@ -20,7 +28,7 @@
             if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
             }
-            echo "Connected successfully";
+            echo "Connected successfully with user <b>" . $id . "</b>";
         ?>   
     </head>
     <body>
