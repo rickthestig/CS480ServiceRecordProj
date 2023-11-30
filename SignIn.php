@@ -82,14 +82,14 @@ session_start();
         <form class="container-sm align-content-center" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
             <div class="mb-3">
                 <label for="emailInput" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="name@example.com" required>
+                <input type="email" class="form-control" id="username" name="username" placeholder="name@example.com" required>
             </div>
             <div class="mb-3">
                 <label for="passwordInput" class="form-label">Password</label>
-                <input class="form-control" id="passwordInput" name="passwordInput" type="password" required>
+                <input class="form-control" id="password" name="password" type="password" required>
             </div>
             <div>
-                <a href="ForgotPassword.html">
+                <a href="ForgotPassword.php">
                     <p class="text-muted">Forgot Password?</p>
                 </a>
             </div>
@@ -103,19 +103,23 @@ session_start();
             </div>
         </form>
         <?php
-            $username = isset($_POST["emailInput"]) ? $_POST["emailInput"] : "";
-            $password = isset($_POST["passwordInput"]) ? $_POST["passwordInput"] : "";
+              $username = isset($_POST["username"]) ? $_POST["username"] : "";
+              $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
-            if(isset($_POST["submitButton"])) {
-                $sql = "SELECT UserID FROM user WHERE username = $username AND password = $password";
+
+              if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $sql = "SELECT UserID FROM User WHERE Username = '$username' AND Password = '$password'";
                 $result = $conn->query($sql);
-                    if ($result === TRUE) {
-                        $_SESSION["UserID"] = $result;
-                        echo "User signed in successfully";
-                    } else {
-                        echo "Error: " . $sql . "<br>" . $conn->error;
+                if($result->num_rows > 0) {
+                        $id = $result->fetch_assoc();
+                        $id = $id["UserID"];
+                        $_SESSION["UserID"] = $id;
+                        echo "<script>window.location.href = 'BrowseServiceProjs.php'</script>";
+                        exit();         
+                    }else {
+                        echo "incorrect";
                     }
-            }
-        ?>
+                }
+            ?>
     </body>
 </html>
