@@ -88,14 +88,14 @@ if(isset($_SESSION['UserID'])) {
         </nav>
         <div class="mt-3">
             <h1 class="text-center">User Settings</h1>
-        <form class="row g-3 justify-content-center p-5">
+        <form class="row g-3 justify-content-center p-5" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
             <div class="form-group">
                 <label for="emailInput">Change Email address</label>
-                <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+                <input type="email" class="form-control" name="emailInput" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
               </div>
               <div class="form-group">
                 <label for="passwordInput">Change Password</label>
-                <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                <input type="password" class="form-control" name="passwordInput" id="passwordInput" placeholder="Password">
               </div>
               <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="verifyChange">
@@ -103,6 +103,25 @@ if(isset($_SESSION['UserID'])) {
               </div>
               <button type="submit" class="btn btn-primary">Apply Changes</button>
           </form>
+        <?php
+            $newEmail = isset($_POST['emailInput']) ? $_POST['emailInput'] : "";
+            $newPass = isset($_POST['passwordInput']) ? $_POST['passwordInput'] : "";
+
+            if($_SERVER['REQUEST_METHOD'] === "POST") {
+                if($newEmail !== "") {
+                    $sql = "UPDATE User SET username = '$newEmail' WHERE UserID = '$id'";
+                    $result = $conn->query($sql);
+                    echo "<p class='text-center'>Email updated!</p>";
+                }
+    
+                if($newPass !== "") {
+                    $sql = "UPDATE User SET password = '$newPass' WHERE UserID = '$id'";
+                    $result = $conn->query($sql);
+                    echo "<p class='text-center'>Password updated!</p>";
+                }
+                echo "<script>window.location.href='signout.php'</script>";
+            }
+        ?>
           <h4 class="text-center">After submitting, you will need to sign in again with the new details!</h4>
     </body>
 </html>
