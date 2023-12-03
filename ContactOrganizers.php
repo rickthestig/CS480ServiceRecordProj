@@ -86,35 +86,45 @@ if(isset($_SESSION['UserID'])) {
                 </div>
             </div>
         </nav>
-        <div class="mt-3">
-            <h1 class="text-center">Contact Organizers</h1>
-            <form class="row g-3 justify-content-center p-5">
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="subject" class="form-control" id="subject">
-                </div>
-                <div class="form-group">
-                    <label for="body">Body</label>
-                    <textarea class="form-control" id="body" rows="3"></textarea>
-                    </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">Send</button>
-                </div>
-                <?php
-                /* $sqladm = $conn->prepare("SELECT AdminEmail from SharedDB Limit 1"); */
-                //change to actual sql query *******
-                /* $sqlbook->bindParam("s","%" . $search . "%"); */
-/*                 $sqladm->execute();
-                $result = $sqladm->get_result();
-                $sqladm->close(); */
-                $result = "erekg13@gmail.com";
-                //perhaps we change this later
-                if(!empty($_POST["body"])){
-                    $body = $_POST["body"];
-                }
-                if(!empty($_POST["subject"])){
-                    $subj = $_POST["subject"];
-                }
-                $mail("$result","$subj",$body);
-            ?>
-              </form>
+        <div class="container">
+    <form class="row g-3 justify-content-center p-5" method="post" action="">
+        <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" class="form-control" id="subject" name="subject">
+        </div>
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea class="form-control" id="body" name="body" rows="3"></textarea>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3" name="submit">Send</button>
+        </div>
+    </form>
+</div>
+
+<?php
+if(isset($_POST["submit"])) {
+    $result = "erekg13@gmail.com"; // Replace this with your actual recipient email
+
+    if(!empty($_POST["body"]) && !empty($_POST["subject"])) {
+        $body = $_POST["body"];
+        $subj = "A message from " . $id . ": " . $_POST["subject"]; // Include username in the subject
+
+        // Additional headers if needed (for HTML email, etc.)
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: Birthday Reminder <' . $id . '>' . "\r\n" . 'Reply-To: ' . $id . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n";
+        // To send an email
+        if(mail($result, $subj, $body, $headers)) {
+            echo "<p>Email sent successfully!</p>";
+        } else {
+            echo "<p>Error: Email not sent.</p>";
+        }
+    } else {
+        echo "<p>Please fill in both subject and body fields.</p>";
+    }
+}
+?>
+
+    </body>
+</html>

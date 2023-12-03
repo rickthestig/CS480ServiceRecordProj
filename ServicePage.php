@@ -167,7 +167,7 @@ if(isset($_SESSION['UserID'])) {
                 </div>
                 <div class="row justify-content-center p-5">
                     <div class="col-auto">
-                        <a href="ContactOrganizers.html">
+                        <a href="ContactOrganizers.php">
                             <button class="btn btn-primary mb-3 p-3">Contact Organizers</button> <!-- add functionality here for session -->
                         </a>
                     </div>
