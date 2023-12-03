@@ -199,8 +199,9 @@ session_start();
                 $sql = "INSERT INTO user (Username, Password, FirstName, LastName, State) VALUES ('$username', '$password', '$firstName', '$lastName', '$state')";
                 if ($conn->query($sql) === TRUE) {
                     echo "User registered successfully";
+                    echo "<script>window.location.href = 'signin.php'</script>";
                 } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                    echo "<script>window.location.href = 'registration.php'</script>";
                 }
             }
             $conn->close();
