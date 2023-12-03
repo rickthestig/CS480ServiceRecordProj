@@ -121,7 +121,7 @@ if(isset($_SESSION['UserID'])) {
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="navbarDarkDropdownMenuLink">
                             <li><a class="dropdown-item" href="Settings.php">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            <li><a class="dropdown-item" href="signout.php">Sign out</a></li>
                         </ul>
                         </li>
                     </ul>
