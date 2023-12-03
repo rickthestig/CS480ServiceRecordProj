@@ -116,7 +116,7 @@ if(isset($_SESSION['UserID'])) {
                 $sql2 = "SELECT COUNT(`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
                 $result = mysqli_query($conn, $sql2);
                 $signedup = mysqli_fetch_assoc($result);
-                echo $signedup["ServiceID"];
+                $signedup_count = $signedup['COUNT(`UserID`)'];
                 ?>
                 <div class="row">
                     <dv class="col">
@@ -139,7 +139,7 @@ if(isset($_SESSION['UserID'])) {
                     <div class="col">
                         <label for="slots" class="col-sm-3 col-form-label">Filled Slots</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="slots" Value="<?php echo $signedup["UserID"] . "/" . $user_data['username']; ?>" disabled> 
+                            <input type="text" class="form-control" id="slots" Value="<?php echo $signedup_count . "/" . $user_data['MaxUserCount']; ?>" disabled> 
                         </div>
                         <label for="loc" class="col-sm-2 col-form-label">Location</label>
                         <div class="col-sm-10">
