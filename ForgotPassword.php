@@ -79,34 +79,39 @@
             </div>
         </nav>
         <div class="mt-3">
-            <h1 class="text-center">Forgot Password</h1>
-        <form class="row g-3 justify-content-center p-5">
-            <div class="col-auto">
-              <label for="emailtext" class="visually-hidden">Email</label>
-              <input type="text" readonly class="form-control-plaintext" id="emailtext" value="Enter Account Email:">
-            </div>
-            <div class="col-auto">
-              <input type="password" class="form-control" id="emailInput" placeholder="email@example.com">
-            </div>
-            <div class="col-auto">
-              <button type="submit" class="btn btn-primary mb-3">Forgot Password</button>
-            </div>
-            <?php
-                /* $sqladm = $conn->prepare("SELECT AdminEmail from SharedDB Limit 1"); */
-                //change to actual sql query *******
-                /* $sqlbook->bindParam("s","%" . $search . "%"); */
-/*                 $sqladm->execute();
-                $result = $sqladm->get_result();
-                $sqladm->close(); */
-                $result = "erekg13@gmail.com";
-                //perhaps we change this later
-                if(!empty($_POST["emailInput"])){
-                    $selected = $_POST["emailInput"];
-                }
-                $msg = "User " . "$selected" . " has forgotten their password.  Please reset it for them and email them.";
-                $mail("$result","password reset",$msg);
-            ?>
-          </form>
-          <h4 class="text-center">If your email exists in the system, you will be emailed with a password reset link shortly!</h4>
-    </body>
+    <h1 class="text-center">Forgot Password</h1>
+    <form class="row g-3 justify-content-center p-5" method="post" action="">
+        <div class="col-auto">
+            <label for="emailInput" class="visually-hidden">Email</label>
+            <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Enter Account Email">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3" name="forgotPassword">Forgot Password</button>
+        </div>
+    </form>
+    <?php
+    if(isset($_POST["forgotPassword"])) {
+        $result = "erekg13@gmail.com"; // Replace this with your actual recipient email
+
+        if(!empty($_POST["emailInput"])) {
+            $selected = $_POST["emailInput"];
+            $msg = "User " . $selected . " has forgotten their password. Please reset it for them and email them.";
+            
+            // Additional headers if needed (for HTML email, etc.)
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            
+            // To send an email
+            if(mail($result, "Password Reset Request", $msg, $headers)) {
+                echo "<h4 class='text-center'>If your email exists in the system, you will be emailed with a password reset link shortly!</h4>";
+            } else {
+                echo "<h4 class='text-center'>Error: Email could not be sent. Please try again later.</h4>";
+            }
+        } else {
+            echo "<h4 class='text-center'>Please enter your email to reset the password.</h4>";
+        }
+    }
+    ?>
+</div>
+</body>
 </html>
