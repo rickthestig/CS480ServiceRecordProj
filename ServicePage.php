@@ -113,9 +113,10 @@ if(isset($_SESSION['UserID'])) {
                 $sql = "SELECT Name, Description, Organizer, Location, Rating, MaxUserCount, StartDate, StartTime, EndDate, EndTime FROM `service` WHERE ServiceID LIKE '%$servID%'";
                 $result = mysqli_query($conn, $sql);
                 $user_data = mysqli_fetch_assoc($result);
-                // $sql2 = "SELECT COUNT(`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
-                // $result = mysqli_query($conn, $sql2);
-                // $signedup = mysqli_fetch_assoc($result);
+                $sql2 = "SELECT COUNT(`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
+                $result = mysqli_query($conn, $sql2);
+                $signedup = mysqli_fetch_assoc($result);
+                echo $signedup["ServiceID"];
                 ?>
                 <div class="row">
                     <dv class="col">
@@ -136,10 +137,10 @@ if(isset($_SESSION['UserID'])) {
                         </div>
                     </div>
                     <div class="col">
-                        <!-- <label for="slots" class="col-sm-3 col-form-label">Filled Slots</label>
+                        <label for="slots" class="col-sm-3 col-form-label">Filled Slots</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="slots" Value="<?php echo $signedup["UserID"] . "/" . $user_data['username']; ?>" disabled> 
-                        </div> -->
+                        </div>
                         <label for="loc" class="col-sm-2 col-form-label">Location</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="loc" value="<?php echo $user_data['Location']; ?>" disabled> <!-- Add Map? -->

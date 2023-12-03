@@ -39,8 +39,10 @@
             $ID = $result->fetch_assoc();
             $ID = $ID["ServiceID"];
             echo "<form action=\"ServicePage.php\" method=\"post\">";
-            echo "<input type=\"text\" id=\"val\" value=\"$ID\" readonly=\"readonly\">";
-            echo "<input type=\"submit\">";
+            echo "<input type=\"text\" name=\"val\" value=\"$ID\" readonly=\"readonly\">";
+            echo "<input type=\"submit\" value=\"Submit\">";
+            echo "</form>";
+            /* I FORGOT TO ADD THE END FORM TAG, I AM GOING TO PUNCH A WALL */
             /* the chance this acutally works is basically none, good luck my small amount of remaining sanity */
             /* I HATE ARRAYS */
         }
