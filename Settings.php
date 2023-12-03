@@ -98,7 +98,7 @@ if(isset($_SESSION['UserID'])) {
                 <input type="password" class="form-control" name="passwordInput" id="passwordInput" placeholder="Password">
               </div>
               <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="verifyChange">
+                <input type="checkbox" class="form-check-input" id="verifyChange" required>
                 <label class="form-check-label" for="verifyChange">Are you sure you want to make these changes?</label>
               </div>
               <button type="submit" class="btn btn-primary">Apply Changes</button>
