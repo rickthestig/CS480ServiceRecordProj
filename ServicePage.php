@@ -18,21 +18,6 @@ if(isset($_SESSION['UserID'])) {
         <script type=”text/javascript” src=”https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js”></script>
         <link href=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css” rel=”stylesheet”>
         <script src=”https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js”> </script>
-        <script>
-            function updateButton() {
-                var signup = document.getElementById("signup");
-                var leave = document.getElementById("leave");
-
-                if(signup.style.display === "flex") {
-                    signup.style.display = "none";
-                    leave.style.display = "flex";
-                }else {
-                    signup.style.display = "flex";
-                    leave.style.display = "none";
-                }
-
-            }
-        </script>
     
         <?php
             $servername = "localhost";
@@ -116,7 +101,6 @@ if(isset($_SESSION['UserID'])) {
                 $sql2 = "SELECT COUNT(`UserID`) FROM `userprojects` WHERE `ServiceID` = $servID";
                 $result = mysqli_query($conn, $sql2);
                 $signedup = mysqli_fetch_assoc($result);
-                echo $signedup["ServiceID"];
                 ?>
                 <div class="row">
                     <dv class="col">
@@ -172,17 +156,34 @@ if(isset($_SESSION['UserID'])) {
                         </a>
                     </div>
                     <div class="col-auto">
-                        <form>
+                        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
                             <?php
-                                $sql = "SELECT UserID FROM userprojects WHERE $servID";
-                                $result = mysqli_query($conn, $sql);
-                                if($result === TRUE) {
-                                    echo "<button class='btn btn-outline-danger mb-3 p-3' id='leave' onclick='updateButton()'>Leave Service</button>";
+                                echo "<input id='val' name='val' value='$servID' type='text' readonly style='display:none;'>";
+
+                                $sql = "SELECT UserID FROM userprojects WHERE ServiceID = $servID AND UserID = $id";
+                                $result = $conn->query($sql);
+
+                                if($result->num_rows > 0) {
+                                    echo "<input type='submit' class='btn btn-outline-danger mb-3 p-3' name='leave' name='leave' id='leave' value='Leave Service'>";
                                 }else {
-                                    echo "<button type='button' class='btn btn-primary mb-3 p-3' id='signup' onclick='updateButton()'>Sign Up</button>";
+                                    echo "<input type='submit' class='btn btn-primary mb-3 p-3' name='signup' id='signup' value='Sign Up'>";
                                 }
                             ?>
                         </form>
+                        <?php
+                            if($_SERVER["REQUEST_METHOD"] === "POST") {
+                                if(isset($_POST['leave'])) {
+                                    $sql = "DELETE FROM userprojects WHERE UserID = $id AND ServiceID = $servID";
+                                    $result = $conn->query($sql);
+                                }
+                            
+                                if(isset($_POST['signup'])) {
+                                    $sql = "INSERT INTO userprojects (UserID, ServiceID) VALUES ($id, $servID)";
+                                    $result = $conn->query($sql);
+                                }
+
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
