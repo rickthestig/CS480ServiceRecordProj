@@ -20,9 +20,10 @@
     $sqlbrowse->execute();
     $result = $sqlbrowse->get_result();
     if ($result->num_rows > 0) {
-        echo "<div class=\"align-content-center\">
-                <table class=\"table\">
-                    <thead>
+        echo "<div class=\"container\">
+                <div class=\"align-content-center\">
+                <table class=\"table table-responsive\">
+                    <thead class= 'thead-dark'>
                         <tr>
                             <th>Name</th>
                             <th>Short Description</th>
@@ -49,7 +50,7 @@
                   </tr>";
         }
     
-        echo "</tbody></table></div>";
+        echo "</tbody></table></div></div>";
             /* I FORGOT TO ADD THE END FORM TAG, I AM GOING TO PUNCH A WALL */
             /* the chance this acutally works is basically none, good luck my small amount of remaining sanity */
             /* I HATE ARRAYS */

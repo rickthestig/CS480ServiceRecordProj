@@ -164,10 +164,6 @@ if(isset($_SESSION['UserID'])) {
                 </div>
             </form>
         </div>
-        <div class="align-content-center">
-            <table class="table">
-                <div id="mrplaceholder"></div>
-            </table>
-        </div>
+            <div id="mrplaceholder"></div>
     </body>
 </html>
