@@ -130,7 +130,7 @@ session_start();
             </div>
             </div>
                 <input type="submit" class="btn btn-primary" name="submitButton" id="submitButton" value="Create Account">
-                <a href="signin.php">Sign in</a>
+                <a href="signin.php">Back to Sign in</a>
         </form>
         <?php
             
