@@ -87,6 +87,8 @@ if(isset($_SESSION['UserID'])) {
                         }
                         if($servID == 2){
                         echo "<img src=\"https://cdn.pixabay.com/photo/2015/10/30/10/43/help-1013700_1280.jpg\" class=\"img-thumbnail\" alt=\"Help Your Community\" width=\"500\" height=\"500\">";
+                        }else {
+                            echo "<img src=\"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.pixelstalk.net%2Fwp-content%2Fuploads%2F2016%2F10%2FBlank-Road-Photo.jpg&f=1&nofb=1&ipt=7a9d46270f9d094a6992251912b37f352df95584e2f1e15f8492638863e85a66&ipo=images\" class=\"img-thumbnail\" alt=\"Help Your Community\" width=\"500\" height=\"500\">";
                         }?>
                     </div>
                     <div class="col-md-6">
