@@ -20,21 +20,28 @@
             if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
             }
-            echo "Connected successfully";
         ?>
     </head>
     <body>
         <div class="mt-3">
-    <h1 class="text-center">Forgot Password</h1>
-    <form class="row g-3 justify-content-center p-5" method="post" action="">
-        <div class="col-auto">
-            <label for="emailInput" class="visually-hidden">Email</label>
-            <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Enter Account Email">
+            <h1 class="text-center">Forgot Password</h1>
+            <form class="row g-3 justify-content-center p-5" method="post" action="">
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <label for="emailInput" class="visually-hidden">Email</label>
+                        <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Enter Account Email">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3" name="forgotPassword">Forgot Password</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-center">
+                        <a href="signin.php">Back to Sign in</a>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3" name="forgotPassword">Forgot Password</button>
-        </div>
-    </form>
     <?php
     if(isset($_POST["forgotPassword"])) {
         $result = "erekg13@gmail.com"; // Replace this with your actual recipient email
@@ -58,6 +65,5 @@
         }
     }
     ?>
-</div>
 </body>
 </html>

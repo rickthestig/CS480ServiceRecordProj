@@ -28,7 +28,6 @@ if(isset($_SESSION['UserID'])) {
             if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
             }
-            echo "Connected successfully with user <b>" . $id . "</b>";
         ?>
         <script>
             function searchQuery(str, id, searchValue) {
@@ -81,35 +80,12 @@ if(isset($_SESSION['UserID'])) {
     </head>
     <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <span class="navbar-brand">Service Project</span>
+            <span class="navbar-brand"> CompassionConnect</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a href="BrowseServiceProjs.php" class="nav-link">Home</a>
-                    </li>
+                    <li class="nav-item active"><a href="BrowseServiceProjs.php" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="AdvancedSearch.php" class="nav-link">Search</a><li>
                 </ul>
-                <div class="container-sm align-content-center">
-                    <form class="d-flex container-fluid justify-content-start" role="search" method="post" action="BrowseServiceProjs.php">
-                        <input class="form-control me-2" id="searchInput" name="searchInput" type="search" placeholder="Search" aria-label="Search">
-                        <input type="submit" class="btn btn-outline-success" name="searchBtn" id="searchBtn" value="Search" >
-                    <a href="AdvancedSearch.php">
-                        <input type="button" class="btn btn-sm btn-outline-secondary" name="advancedBtn" id="advancedBtn" value="Advanced">
-                        </a>
-                    </form>
-                    <?php
-
-                        $search = isset($_POST["searchInput"]) ? $_POST["searchInput"] : "";
-
-                        if(isset($_POST["searchBtn"])) {
-                            $sql = "SELECT Name FROM Service WHERE Name LIKE '%$search%'";
-                            $result = $conn->query($sql);
-
-
-                            //will have to query this on BrowseServerProjs.php - form redirects them on 'post'
-                        }
-
-
-                    ?>
                 </div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -127,10 +103,12 @@ if(isset($_SESSION['UserID'])) {
                     </ul>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="Settings.php">
-                        <img class="d-inline-block" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png"
-                        width="30" height=30>
-                    </a>
+                    <?php
+                        $sql = "SELECT FirstName FROM User WHERE UserID = '$id'";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                    ?>
+                    <h5><?php echo $row['FirstName']?></h5>
                 </div>
             </div>
         </nav>
