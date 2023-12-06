@@ -15,37 +15,41 @@
     }
 
     
-    $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount` FROM `service` WHERE $filter LIKE '$input%'");
+    $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service` WHERE $filter LIKE '$input%'");
     /* $sqlbook->bindParam("s","%" . $search . "%"); */
     $sqlbrowse->execute();
     $result = $sqlbrowse->get_result();
-    if($result->num_rows > 0) {
-        echo 
-        "<div class=\"align-content-center\">
-            <table class=\"table\">
-                <tr>
-                    <th>Name</th>
-                    <th>Short Description</th>
-                    <th>Location</th>
-                    <th>Rating</th>
-                    <th>Max User Count</th>
-                </tr>
-            </table>
-        </div>";
+    if ($result->num_rows > 0) {
+        echo "<div class=\"align-content-center\">
+                <table class=\"table\">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Short Description</th>
+                            <th>Location</th>
+                            <th>Rating</th>
+                            <th>Max User Count</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
         while ($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["Name"] . "</td><td>" . $row["Blurb"] . "</td><td>" . $row["Location"] . "<tr><td>" . $row["Rating"] . "</td><td>" . $row["MaxUserCount"];
-            echo "</td></tr>\n";
-            $sqlID = $conn->prepare("SELECT ServiceID FROM `service` WHERE Name LIKE '". $row['Name'] . "%'");
-            /* THIS STUPID THING MADE ME SEETHE FOR 2 and a half hours because i quoted the STUPID SERVICE ID, I AM SEETHING AND MALDING, but at least it works now */
-            /* $sqlbook->bindParam("s","%" . $search . "%"); */
-            $sqlID->execute();
-            $result = $sqlID->get_result();
-            $ID = $result->fetch_assoc();
-            $ID = $ID["ServiceID"];
-            echo "<form action=\"ServicePage.php\" method=\"post\">";
-            echo "<input type=\"text\" name=\"val\" value=\"$ID\" readonly=\"readonly\">";
-            echo "<input type=\"submit\" value=\"Submit\">";
-            echo "</form>";
+            echo "<tr>
+                    <td>" . $row["Name"] . "</td>
+                    <td>" . $row["Blurb"] . "</td>
+                    <td>" . $row["Location"] . "</td>
+                    <td>" . $row["Rating"] . "</td>
+                    <td>" . $row["MaxUserCount"] . "</td>
+                    <td>
+                        <form action=\"ServicePage.php\" method=\"post\">
+                            <input type=\"hidden\" name=\"val\" value=\"" . $row['ServiceID'] . "\" readonly=\"readonly\">
+                            <input type=\"submit\" value=\"Submit\" class=\"btn btn-primary\">
+                        </form>
+                    </td>
+                  </tr>";
+        }
+    
+        echo "</tbody></table></div>";
             /* I FORGOT TO ADD THE END FORM TAG, I AM GOING TO PUNCH A WALL */
             /* the chance this acutally works is basically none, good luck my small amount of remaining sanity */
             /* I HATE ARRAYS */
@@ -53,9 +57,7 @@
         }
 
         $sqlbrowse->close();
-        $sqlID->close();
         $conn->close();
-    }
     
 
 ?>
