@@ -37,7 +37,7 @@ if(isset($_SESSION['UserID'])) {
     </head>
     <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <span class="navbar-brand"> CompassionConnect</span>
+            <span class="navbar-brand p-1"> CompassionConnect</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active"><a href="BrowseServiceProjs.php" class="nav-link">Home</a></li>
@@ -65,7 +65,7 @@ if(isset($_SESSION['UserID'])) {
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                     ?>
-                    <h5><?php echo $row['FirstName']?></h5>
+                    <h5 class="p-1"><?php echo $row['FirstName']?></h5>
                 </div>
             </div>
         </nav>
