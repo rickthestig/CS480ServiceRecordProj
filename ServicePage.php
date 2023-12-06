@@ -93,7 +93,7 @@ if(isset($_SESSION['UserID'])) {
         </nav>
             <div class="container-sm align-content-center my-3">
                 <?php
-                $servID = isset($_POST['val']) ? $_POST['val'] : "";
+                $servID = isset($_POST['val']) ? $_POST['val'] : $_SESSION['val'];
                 echo "LOOK HERE <b>" . $servID . "</b>";
                 $sql = "SELECT Name, Description, Organizer, Location, Rating, MaxUserCount, StartDate, StartTime, EndDate, EndTime FROM `service` WHERE ServiceID LIKE '%$servID%'";
                 $result = mysqli_query($conn, $sql);
@@ -172,15 +172,18 @@ if(isset($_SESSION['UserID'])) {
                             ?>
                         </form>
                         <?php
-                            if($_SERVER["REQUEST_METHOD"] === "POST") {
-                                if(isset($_POST['leave'])) {
-                                    $sql = "DELETE FROM userprojects WHERE UserID = $id AND ServiceID = $servID";
-                                    $result = $conn->query($sql);
-                                }
-                            
+                            $_SESSION['val'] = $servID;
+                            if($_SERVER["REQUEST_METHOD"] === "POST") {                            
                                 if(isset($_POST['signup'])) {
                                     $sql = "INSERT INTO userprojects (UserID, ServiceID) VALUES ($id, $servID)";
                                     $result = $conn->query($sql);
+                                    echo "<script>window.location.href = 'ServicePage.php'</script>";
+                                }
+
+                                if(isset($_POST['leave'])) {
+                                    $sql = "DELETE FROM userprojects WHERE UserID = $id AND ServiceID = $servID";
+                                    $result = $conn->query($sql);
+                                    echo "<script>window.location.href = 'ServicePage.php'</script>";
                                 }
 
                             }
