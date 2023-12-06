@@ -53,6 +53,7 @@
             // Additional headers if needed (for HTML email, etc.)
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'From: Password Reset <erekg13@gmail.com>' . "\r\n" . 'Reply-To: ' . 'erekg13@gmail.com' . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n";
             
             // To send an email
             if(mail($result, "Password Reset Request", $msg, $headers)) {

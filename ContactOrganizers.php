@@ -91,7 +91,7 @@ if(isset($_POST["submit"])) {
         // Additional headers if needed (for HTML email, etc.)
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: Birthday Reminder <' . $id . '>' . "\r\n" . 'Reply-To: ' . $id . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n";
+        $headers .= 'From: Contact from CompassionConnect <' . $id . '>' . "\r\n" . 'Reply-To: ' . $id . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n";
         // To send an email
         if(mail($result, $subj, $body, $headers)) {
             echo '<script>alert("Email sent successfully!")</script>';
