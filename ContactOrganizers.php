@@ -94,12 +94,12 @@ if(isset($_POST["submit"])) {
         $headers .= 'From: Birthday Reminder <' . $id . '>' . "\r\n" . 'Reply-To: ' . $id . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n";
         // To send an email
         if(mail($result, $subj, $body, $headers)) {
-            echo "<p>Email sent successfully!</p>";
+            echo '<script>alert("Email sent successfully!")</script>';
         } else {
-            echo "<p>Error: Email not sent.</p>";
+            echo '<script>alert("Error: Email could not be sent.")</script>';
         }
     } else {
-        echo "<p>Please fill in both subject and body fields.</p>";
+        echo '<script>alert("Please fill out all fields.")</script>';
     }
 }
 ?>

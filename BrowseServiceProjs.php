@@ -95,7 +95,7 @@ if(isset($_SESSION['UserID'])) {
                                     <td>
                                         <form action=\"ServicePage.php\" method=\"post\">
                                         <input type=\"text\" name=\"val\" value=\"$ID\" readonly=\"readonly\" style=\"display: none\">
-                                        <input type=\"submit\" value=\"Visit Page\">
+                                        <input type=\"submit\" value=\"Visit Page\" class=\"btn btn-primary\">
                                         </form>
                                     </td>
                                 </tr>";
