@@ -65,7 +65,7 @@ session_start();
                         echo "<script>window.location.href = 'BrowseServiceProjs.php'</script>";
                         exit();         
                     }else {
-                        echo "incorrect";
+                        echo "<script>alert('Sign in unsuccessful')</script>";
                     }
                 }
             ?>
