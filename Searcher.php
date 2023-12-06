@@ -44,7 +44,7 @@
                     <td>
                         <form action=\"ServicePage.php\" method=\"post\">
                             <input type=\"hidden\" name=\"val\" value=\"" . $row['ServiceID'] . "\" readonly=\"readonly\">
-                            <input type=\"submit\" value=\"Submit\" class=\"btn btn-primary\">
+                            <input type=\"submit\" value=\"Visit Page\" class=\"btn btn-primary\">
                         </form>
                     </td>
                   </tr>";
