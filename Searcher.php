@@ -14,8 +14,11 @@
     die("Connection failed: " . $conn->connect_error);
     }
 
-    
-    $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service` WHERE $filter LIKE '$input%'");
+    if($filter == "Rating") {
+        $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service` WHERE $filter > '$input%'");
+    }else {
+        $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service` WHERE $filter LIKE '$input%'");
+    }
     /* $sqlbook->bindParam("s","%" . $search . "%"); */
     $sqlbrowse->execute();
     $result = $sqlbrowse->get_result();
