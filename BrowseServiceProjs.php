@@ -90,7 +90,7 @@ if(isset($_SESSION['UserID'])) {
                 <div class="align-content-center">
                     <table class="table table-responsive">
                         <?php
-                        $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount` FROM `service`");
+                        $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service`");
                         $sqlbrowse->execute();
                         $result = $sqlbrowse->get_result();
                         $sqlbrowse->close();
@@ -107,18 +107,26 @@ if(isset($_SESSION['UserID'])) {
                             <tbody>";
 
                         while ($row = $result->fetch_assoc()) {
+                            $ID = $row["ServiceID"];
                             echo "<tr>
                                     <td>" . $row["Name"] . "</td>
                                     <td>" . $row["Blurb"] . "</td>
                                     <td>" . $row["Location"] . "</td>
                                     <td>" . $row["Rating"] . "</td>
                                     <td>" . $row["MaxUserCount"] . "</td>
+                                    <td>
+                                        <form action=\"ServicePage.php\" method=\"post\">
+                                        <input type=\"text\" name=\"val\" value=\"$ID\" readonly=\"readonly\" style=\"display: none\">
+                                        <input type=\"submit\" value=\"Visit Page\">
+                                        </form>
+                                    </td>
                                 </tr>";
                         }
-
                         echo "</tbody>";
+
                         $conn->close();
                         ?>
+                        
                     </table>
                 </div>
             </div>
