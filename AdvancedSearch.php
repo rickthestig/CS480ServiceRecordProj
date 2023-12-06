@@ -143,12 +143,6 @@ if(isset($_SESSION['UserID'])) {
                     <option value="rating">Rating</option>
                     <option value="date">Date in yyyy-mm-dd (with dashes)</option>
                 </select>
-
-                
-                <div class="form-group col-md-1">
-                    <input class="form-check-input" type="checkbox" value="full" id="notFull">
-                    <label class="form-check-label" for="notFull">Not Full</label>
-                </div>
                 <div class="input-group" id="nameSearch" name="nameSearch">
                     <input id="nameInput" type="search" class="form-control rounded" placeholder="Advanced search" aria-label="Search1" aria-describedby="search-addon1" onkeyup="searchQuery(this.value, 'filter', 'Name')"/> <!-- I need to add functionality for this to get the selected value-->
                 </div>
