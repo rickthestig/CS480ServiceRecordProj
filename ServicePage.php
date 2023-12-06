@@ -118,7 +118,7 @@ if(isset($_SESSION['UserID'])) {
                         </div>
                         <label for="desc" class="col-sm-2 col-form-label">Description</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="desc" Value="<?php echo $user_data['Description']; ?>" disabled></textarea>
+                            <textarea class="form-control" id="desc" placeholder="<?php echo $user_data['Description']; ?>" disabled></textarea>
                         </div>
                     </div>
                     <div class="col">
