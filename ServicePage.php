@@ -72,7 +72,6 @@ if(isset($_SESSION['UserID'])) {
             <div class="container-sm align-content-center my-3">
                 <?php
                 $servID = isset($_POST['val']) ? $_POST['val'] : $_SESSION['val'];
-                echo "LOOK HERE <b>" . $servID . "</b>";
                 $sql = "SELECT Name, Description, Organizer, Location, Rating, MaxUserCount, StartDate, StartTime, EndDate, EndTime FROM `service` WHERE ServiceID LIKE '%$servID%'";
                 $result = mysqli_query($conn, $sql);
                 $user_data = mysqli_fetch_assoc($result);
@@ -82,10 +81,15 @@ if(isset($_SESSION['UserID'])) {
                 $signedup_count = $signedup['COUNT(`UserID`)'];
                 ?>
                 <div class="row">
-                    <dv class="col">
-                        <img src="https://www.cityofmadison.com/sites/default/files/events/images/dchs.jpg" class="img-thumbnail" alt="...">
+                    <div class="col-md-6">
+                        <?php if($servID == 1){
+                        echo "<img src=\"https://pbs.twimg.com/profile_images/458982599361175552/Q849K4nl_400x400.jpeg\" class=\"img-thumbnail\" alt=\"DCHS Logo\" width=\"500\" height=\"500\">";
+                        }
+                        if($servID == 2){
+                        echo "<img src=\"https://cdn.pixabay.com/photo/2015/10/30/10/43/help-1013700_1280.jpg\" class=\"img-thumbnail\" alt=\"Help Your Community\" width=\"500\" height=\"500\">";
+                        }?>
                     </div>
-                    <div class="col">
+                    <div class="col-md-6">
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="name" value="<?php echo $user_data['Name']; ?>" disabled>
@@ -98,8 +102,6 @@ if(isset($_SESSION['UserID'])) {
                         <div class="col-sm-10">
                             <textarea class="form-control" id="desc" placeholder="<?php echo $user_data['Description']; ?>" disabled></textarea>
                         </div>
-                    </div>
-                    <div class="col">
                         <label for="slots" class="col-sm-3 col-form-label">Filled Slots</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="slots" Value="<?php echo $signedup_count . "/" . $user_data['MaxUserCount']; ?>" disabled> 
