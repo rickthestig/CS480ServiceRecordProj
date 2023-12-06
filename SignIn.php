@@ -24,7 +24,10 @@ session_start();
         ?>
     </head>
     <body>
-        <form class="container-sm align-content-center" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+        <form class="container-sm align-content-center py-5" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
+            <div class="mt-3">
+                <h1 class="text-center">Sign in</h1>
+            </div>
             <div class="mb-3">
                 <label for="emailInput" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="username" name="username" placeholder="name@example.com" required>
