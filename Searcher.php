@@ -15,7 +15,7 @@
     }
 
     if($filter == "Rating") {
-        $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service` WHERE $filter > '$input%'");
+        $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service` WHERE $filter >= '$input%'");
     }else {
         $sqlbrowse = $conn->prepare("SELECT `Name`,`Blurb`,`Location`,`Rating`,`MaxUserCount`,`ServiceID` FROM `service` WHERE $filter LIKE '$input%'");
     }
